@@ -12,6 +12,20 @@ export default createGlobalStyle`
     font-family: 'Roboto Slab', serif;
   }
 
+  ::-webkit-scrollbar{
+    width: .7rem; 
+    height: .7rem;
+  }
+
+  ::-webkit-scrollbar-track, ::-webkit-scrollbar-corner{
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb{
+   background-color: ${({theme}) => theme.COLORS.WHITE};
+   border-radius: 5rem;
+  }
+
   body {
     background-color: ${({theme}) => theme.COLORS.BACKGROUND_800};
     color: ${({theme}) => theme.COLORS.WHITE};
