@@ -8,8 +8,10 @@ export function Home(){
       <Header />
 
       <Menu>
-        <Search />
       </Menu>
+
+      <Search>
+      </Search>
 
       <Content>
       </Content>
