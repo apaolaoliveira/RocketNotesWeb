@@ -1,17 +1,24 @@
+
 import { Background, Container, Form } from "./styles";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
-import { FiLock } from 'react-icons/fi';
+import { FiLock, FiUser } from 'react-icons/fi';
 import { MdOutlineAlternateEmail } from "react-icons/md";
 
-export function SignIn(){
+export function SignUp(){
   return(
     <Container>
+      <Background />
       <Form>
         <h1>Rocket Notes</h1>
         <p>Save and manage your favorites links</p>
 
-        <h2>Sign in</h2>
+        <h2>Sign up</h2>
+        <Input 
+          placeholder="Name"
+          type="text"
+          icon={FiUser}
+        />
         <Input 
           placeholder="Email"
           type="text"
@@ -23,11 +30,10 @@ export function SignIn(){
           icon={FiLock}
         />
 
-        <Button title="Login" />
+        <Button title="Sign up" />
 
-        <a href="">Sign up</a>
+        <a href="">Back</a>
       </Form>
-      <Background />
     </Container>
   );
 }
