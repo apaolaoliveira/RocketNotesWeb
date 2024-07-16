@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import bgCoffee from "../../assets/bg-coffee.png";
 
 export const Container = styled.div`
   height: 100vh;
@@ -36,4 +37,10 @@ export const Form = styled.form`
     margin-top: 3rem;
     color: ${({theme}) => theme.COLORS.ORANGE};
   }
+`;
+
+export const Background = styled.div`
+  flex: 1;
+  background: url(${bgCoffee}) no-repeat center center;
+  background-size: cover;
 `;

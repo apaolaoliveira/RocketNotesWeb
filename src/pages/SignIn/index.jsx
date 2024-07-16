@@ -1,7 +1,8 @@
-import { Container } from "./styles";
+import { Background, Container, Form } from "./styles";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
-import { FiEmail, FiLock } from 'react-icons/fi';
+import { FiLock } from 'react-icons/fi';
+import { MdOutlineAlternateEmail } from "react-icons/md";
 
 export function SignIn(){
   return(
@@ -14,7 +15,7 @@ export function SignIn(){
         <Input 
           placeholder="Email"
           type="text"
-          icon={FiEmail}
+          icon={MdOutlineAlternateEmail}
         />
         <Input 
           placeholder="Password"
@@ -26,6 +27,7 @@ export function SignIn(){
 
         <a href="">Sign up</a>
       </Form>
+      <Background />
     </Container>
   );
 }
