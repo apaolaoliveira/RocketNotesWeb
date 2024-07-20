@@ -3,6 +3,7 @@ import { Input } from '../../components/Input';
 import { TextArea } from '../../components/TextArea';
 import { NoteItem } from '../../components/NoteItem';
 import { Section } from '../../components/Section';
+import { Button } from '../../components/Button';
 
 import { Container, Form } from './styles';
 
@@ -24,6 +25,16 @@ export function NewNote(){
             <NoteItem canOpenLink value="https://www.youtube.com" />
             <NoteItem isNew placeholder="Novo link"/>
           </Section>
+
+          <Section title="Tags">
+            <div className="tags">
+              <NoteItem value="react" />
+              <NoteItem value="express" />
+              <NoteItem isNew placeholder="Nova tag"/>
+            </div>
+          </Section>
+
+          <Button title="Save"/>
         </Form>
       </main>
     </Container>
