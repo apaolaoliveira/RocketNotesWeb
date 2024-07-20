@@ -15,6 +15,15 @@ export const Container = styled.div`
   > button {
     border: none;
     background: none;
+    cursor: pointer;
+  }
+
+  .button-delete {
+    color: ${({ theme }) => theme.COLORS.RED};
+  }
+
+  .button-add {
+    color: ${({ theme }) => theme.COLORS.ORANGE};
   }
 
   > input {
@@ -24,9 +33,16 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.COLORS.WHITE};
     background: transparent;
     border: none;
-
     &:placeholder {
       color: ${({ theme }) => theme.COLORS.GRAY_300};
+    }
+  }
+
+  .openLink{
+    text-decoration: none;
+    cursor: pointer;
+    &:hover{
+      text-decoration: underline;
     }
   }
 `;
