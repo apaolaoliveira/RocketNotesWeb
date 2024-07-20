@@ -6,6 +6,7 @@ import { Section } from '../../components/Section';
 import { Button } from '../../components/Button';
 
 import { Container, Form } from './styles';
+import { Link } from 'react-router-dom';
 
 export function NewNote(){
   return ( 
@@ -15,7 +16,7 @@ export function NewNote(){
         <Form>
           <header>
             <h1>New Note</h1>
-            <a href="/">Back</a>
+            <Link to="/">Back</Link>
           </header>
           <Input type="text" placeholder="Title" />
           <TextArea placeholder="Write your note here..." />

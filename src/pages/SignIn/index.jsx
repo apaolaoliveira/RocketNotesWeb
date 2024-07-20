@@ -3,6 +3,7 @@ import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { FiLock } from 'react-icons/fi';
 import { MdOutlineAlternateEmail } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 export function SignIn(){
   return(
@@ -25,7 +26,7 @@ export function SignIn(){
 
         <Button title="Login" />
 
-        <a href="">Sign up</a>
+        <Link to="/register">Sign up</Link>
       </Form>
       <Background />
     </Container>
