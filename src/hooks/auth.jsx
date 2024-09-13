@@ -3,7 +3,7 @@ import { api } from '../services/api';
 
 export const AuthContext = createContext({});
 
-function AuthProvider({ children }) {
+export function AuthProvider({ children }) {
   const [data, setData] = useState({});
 
   async function signIn({ email, password }){
@@ -22,6 +22,13 @@ function AuthProvider({ children }) {
     }
   }
 
+  function signOut(){
+    localStorage.removeItem('@rocketnotes:user');
+    localStorage.removeItem('@rocketnotes:token');
+
+    setData({});
+  }
+
   useEffect(() => {
     const user = localStorage.getItem('@rocketnotes:user');
     const token = localStorage.getItem('@rocketnotes:token');
@@ -33,14 +40,18 @@ function AuthProvider({ children }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ signIn, user: data.user }}>
+    <AuthContext.Provider 
+      value={{ 
+        signIn, 
+        signOut,
+        user: data.user 
+      }}
+    >
       {children}
     </AuthContext.Provider>
   )
 }
 
-function useAuth() {
+export function useAuth() {
   return useContext(AuthContext);
 }
-
-export { AuthProvider, useAuth }
