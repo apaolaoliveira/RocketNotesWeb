@@ -29,6 +29,19 @@ export function AuthProvider({ children }) {
     setData({});
   }
 
+  async function updateProfile({ user }){
+    try {
+      await api.put('/users', user);
+      localStorage.setItem('@rocketnotes:user', JSON.stringify(user));
+      
+      setData({ user, token: data.token });
+      alert('Updated profile!');
+    } catch (err) {
+      if (err.response) alert(err.response.data.message);
+      else alert('It was not possible to update your profile');
+    }
+  }
+
   useEffect(() => {
     const user = localStorage.getItem('@rocketnotes:user');
     const token = localStorage.getItem('@rocketnotes:token');
@@ -44,6 +57,7 @@ export function AuthProvider({ children }) {
       value={{ 
         signIn, 
         signOut,
+        updateProfile,
         user: data.user 
       }}
     >
