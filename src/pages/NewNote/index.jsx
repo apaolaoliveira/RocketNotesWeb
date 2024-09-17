@@ -7,8 +7,16 @@ import { Button } from '../../components/Button';
 
 import { Container, Form } from './styles';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 export function NewNote(){
+  const [links, setLinks] = useState([]);
+  const [newLink, setNewLink] = useState("");
+
+  function handleAddLink(){
+    setLinks(prevState => [...prevState, newLink]);
+    setNewLink('');
+  }
   return ( 
     <Container>
       <Header />
@@ -22,16 +30,29 @@ export function NewNote(){
           <TextArea placeholder="Write your note here..." />
 
           <Section title="Useful links">
-            <NoteItem canOpenLink value="https://www.google.com" />
-            <NoteItem canOpenLink value="https://www.youtube.com" />
-            <NoteItem isNew placeholder="Novo link"/>
+            {
+              links.map((link, index) => (
+                <NoteItem 
+                  key={String(index)} 
+                  value={link} 
+                  onClick={() => {}}
+                />
+              ))
+            }
+            <NoteItem 
+              isNew 
+              placeholder="New link"
+              value={newLink}
+              onChange={e => setNewLink(e.target.value)}
+              onClick={handleAddLink}
+            />
           </Section>
 
           <Section title="Tags">
             <div className="tags">
               <NoteItem value="react" />
               <NoteItem value="express" />
-              <NoteItem isNew placeholder="Nova tag"/>
+              <NoteItem isNew placeholder="New tag"/>
             </div>
           </Section>
 
