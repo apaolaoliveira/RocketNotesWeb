@@ -13,6 +13,9 @@ export function NewNote(){
   const [links, setLinks] = useState([]);
   const [newLink, setNewLink] = useState("");
 
+  const [tags, setTags] = useState([]);
+  const [newTag, setNewTag] = useState("");
+
   function handleAddLink(){
     setLinks(prevState => [...prevState, newLink]);
     setNewLink('');
@@ -20,6 +23,11 @@ export function NewNote(){
 
   function handleDeleteLink(deletedLink){
     setLinks(prevState => prevState.filter((link) => link !== deletedLink));
+  }
+
+  function handleAddTag(){
+    setTags(prevState => [...prevState, newTag]);
+    setNewTag('');
   }
 
   return ( 
@@ -55,9 +63,22 @@ export function NewNote(){
 
           <Section title="Tags">
             <div className="tags">
-              <NoteItem value="react" />
-              <NoteItem value="express" />
-              <NoteItem isNew placeholder="New tag"/>
+              {
+                tags.map((tag, index) => (
+                  <NoteItem 
+                    key={String(index)} 
+                    value={tag} 
+                    onClick={() => {}}
+                  />
+                ))
+              }
+              <NoteItem 
+                isNew 
+                placeholder="New tag"
+                value={newTag}
+                onChange={e => setNewTag(e.target.value)}
+                onClick={handleAddTag}
+              />
             </div>
           </Section>
 
