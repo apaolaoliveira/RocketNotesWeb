@@ -6,15 +6,21 @@ import { Section } from '../../components/Section';
 import { Button } from '../../components/Button';
 
 import { Container, Form } from './styles';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { api } from '../../services/api';
 
 export function NewNote(){
+ const [title, setTitle] = useState('');
+ const [description, setDescription] = useState('');
+
   const [links, setLinks] = useState([]);
   const [newLink, setNewLink] = useState("");
 
   const [tags, setTags] = useState([]);
   const [newTag, setNewTag] = useState("");
+
+  const navigate = useNavigate();
 
   function handleAddLink(){
     setLinks(prevState => [...prevState, newLink]);
@@ -35,6 +41,18 @@ export function NewNote(){
     setNewTag('');
   }
 
+  async function handleNewNote(){
+    await api.post('/notes', {
+      title,
+      description,
+      links,
+      tags
+    });
+
+    alert('New note added successfully');
+    navigate("/");
+  }
+
   return ( 
     <Container>
       <Header />
@@ -44,8 +62,16 @@ export function NewNote(){
             <h1>New Note</h1>
             <Link to="/">Back</Link>
           </header>
-          <Input type="text" placeholder="Title" />
-          <TextArea placeholder="Write your note here..." />
+          <Input 
+            type="text" 
+            placeholder="Title" 
+            onChange={e => setTitle(e.target.value)}            
+          />
+
+          <TextArea 
+            placeholder="Write your note here..." 
+            onChange={e => setDescription(e.target.value)} 
+          />
 
           <Section title="Useful links">
             {
@@ -87,7 +113,10 @@ export function NewNote(){
             </div>
           </Section>
 
-          <Button title="Save"/>
+          <Button 
+            title="Save"
+            onClick={handleNewNote}
+          />
         </Form>
       </main>
     </Container>
