@@ -42,6 +42,10 @@ export function NewNote(){
   }
 
   async function handleNewNote(){
+    if(!title) return alert('The title is required');
+    if(newLink) return alert('It looks like you forgot to add one link!');
+    if(newTag) return alert('It looks like you forgot to add one tag!');
+
     await api.post('/notes', {
       title,
       description,
