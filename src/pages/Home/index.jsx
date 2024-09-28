@@ -16,10 +16,12 @@ export function Home(){
   function handleTagsSelected(tagName) {
     const alreadySelected = tagsSelected.includes(tagName);
 
-    if (alreadySelected) 
-      setTagsSelected(prevState => prevState.filter(t => t !== tagName));
-    else 
+    if (alreadySelected){
+      const filteredTags = tagsSelected.filter(tag => tag !== tagName);
+      setTagsSelected(filteredTags);
+    } else {
       setTagsSelected(prevState => [...prevState, tagName]);
+    }
   }
 
   useEffect(() => {
@@ -41,19 +43,19 @@ export function Home(){
           <ButtonText 
             title="All notes" 
             onClick={() => handleTagsSelected("All notes")}
-            isActive={tagsSelected.length === 0}
+            $isActive={tagsSelected.length === 0}
           />
         </li>
 
-        { tags && tags.map(tag =>{
+        {tags && tags.map(tag => (
             <li key={String(tag.id)}>
               <ButtonText 
                 title={tag.name}
                 onClick={() => handleTagsSelected(tag.name)}
-                isActive={tagsSelected.includes(tag.name)}
+                $isActive={tagsSelected.includes(tag.name)}
               />
             </li>
-          })
+          ))
         }
       </Menu>
 
