@@ -46,6 +46,9 @@ export function NewNote(){
     if(newLink) return alert('It looks like you forgot to add one link!');
     if(newTag) return alert('It looks like you forgot to add one tag!');
 
+    const allLinksValid = links.every(link => link.startsWith('http://') || link.startsWith('https://'));
+    if (!allLinksValid) return alert('Please make sure all links start with http:// or https://');
+    
     await api.post('/notes', {
       title,
       description,
