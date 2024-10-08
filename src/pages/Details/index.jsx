@@ -27,6 +27,16 @@ export function Details(){
   function handleBack(){
     navigate('/');
   }
+
+  async function handleDelete(){
+    const confirm = window.confirm('Are you sure you want to delete this note?');
+
+    if(confirm){
+      await api.delete(`/notes/${params.id}`);
+      alert('Note deleted successfully');
+      navigate('/');
+    }
+  }
   
   return(
     <Container>
@@ -35,7 +45,10 @@ export function Details(){
       { data &&
         <main>
           <Content>
-            <ButtonText title="Delete note" />
+            <ButtonText 
+              onClick={handleDelete}
+              title="Delete note" 
+            />
 
             <h1>{data.title}</h1>
             <p>{data.description}</p>
