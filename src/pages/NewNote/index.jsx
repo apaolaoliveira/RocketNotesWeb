@@ -6,9 +6,10 @@ import { Section } from '../../components/Section';
 import { Button } from '../../components/Button';
 
 import { Container, Form } from './styles';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { api } from '../../services/api';
+import { ButtonText } from '../../components/ButtonText';
 
 export function NewNote(){
  const [title, setTitle] = useState('');
@@ -57,7 +58,7 @@ export function NewNote(){
     });
 
     alert('New note added successfully');
-    navigate("/");
+    navigate(-1);
   }
 
   return ( 
@@ -67,7 +68,7 @@ export function NewNote(){
         <Form>
           <header>
             <h1>New Note</h1>
-            <Link to="/">Back</Link>
+            <ButtonText onClick={() => navigate(-1)} title="Back" />
           </header>
           <Input 
             type="text" 

@@ -24,17 +24,13 @@ export function Details(){
     fetchNote();
   }, []);
 
-  function handleBack(){
-    navigate('/');
-  }
-
   async function handleDelete(){
     const confirm = window.confirm('Are you sure you want to delete this note?');
 
     if(confirm){
       await api.delete(`/notes/${params.id}`);
       alert('Note deleted successfully');
-      navigate('/');
+      navigate(-1);
     }
   }
   
@@ -80,7 +76,7 @@ export function Details(){
             }
 
             <Button 
-              onClick={handleBack}
+              onClick={() => navigate(-1)}
               title='Back'
             />
           </Content>
