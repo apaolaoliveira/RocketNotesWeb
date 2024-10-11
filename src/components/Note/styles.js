@@ -10,12 +10,30 @@ export const Container = styled.button`
   padding: 2.2rem;
   margin-bottom: 1.6rem;
 
-  > h1 {
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  > div h1 {
     flex: 1;
     text-align: left;
     font-weight: 700;
     font-size: 2.4rem;
     color: ${({theme}) => theme.COLORS.WHITE};
+  }
+
+  > div svg {
+    color: white;
+    font-size: 1.8rem;
+  }
+
+  > p {
+    font-size: 1.4rem;
+    color: #e0d0c4;
+    display: flex;
+    margin: 2rem 0;
   }
 
   > footer {
