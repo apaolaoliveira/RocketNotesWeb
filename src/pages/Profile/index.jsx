@@ -60,7 +60,12 @@ export function Profile(){
 
       <Form>
         <Avatar>
-          <img src={avatar} alt='Profile picture' />
+          <img 
+            src={avatar} 
+            alt='Profile picture'
+            onError={(e) => e.target.src = avatarPlaceholder} 
+          />
+          
           <label htmlFor="avatar">
             <FiCamera />
             <input 

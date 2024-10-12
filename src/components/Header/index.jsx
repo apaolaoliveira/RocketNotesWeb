@@ -14,7 +14,11 @@ export function Header(){
   return (
     <Container>
       <Profile to="/profile">
-        <img src={avatarUrl} alt={`Profile picture from ${user.name}`} />
+        <img 
+          src={avatarUrl} 
+          alt={`Profile picture from ${user.name}`} 
+          onError={(e) => e.target.src = avatarPlaceholder}
+        />
 
         <div>
           <span>Welcome,</span>
