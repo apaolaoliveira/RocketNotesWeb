@@ -22,8 +22,11 @@ export const Links = styled.ul`
 
   > li {
     margin-top: 1.2rem;
+    display: flex;
+    align-items: center;
 
     a {
+      margin-left: 1rem;
       color: ${({ theme }) => theme.COLORS.WHITE};
     }
   }
@@ -36,8 +39,21 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
 
-  > button:first-child {
-    align-self: end;
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  > div button {
+    background: transparent;
+    border: none;
+
+    > svg {
+      fill: ${({ theme }) => theme.COLORS.ORANGE};
+      cursor: pointer;
+      font-size: 2rem;
+    }
   }
   
   > h1 {

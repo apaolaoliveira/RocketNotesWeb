@@ -3,11 +3,12 @@ import { Container, Links, Content } from './styles.js';
 import { Header } from '../../components/Header';
 import { Section } from '../../components/Section';
 import { Tag } from '../../components/Tag';
-import { Button } from '../../components/Button';
 import { ButtonText } from '../../components/ButtonText';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { api } from '../../services/api.js';
+import { FaArrowLeft } from "react-icons/fa6";
+import { IoLink } from "react-icons/io5";
 
 export function Details(){
   const [data, setData] = useState(null);
@@ -41,10 +42,19 @@ export function Details(){
       { data &&
         <main>
           <Content>
-            <ButtonText 
-              onClick={handleDelete}
-              title="Delete note" 
-            />
+            <div>
+              <button 
+                onClick={() => navigate(-1)}
+                type='button'
+              >
+                <FaArrowLeft/>
+              </button>
+
+              <ButtonText 
+                onClick={handleDelete}
+                title="Delete note" 
+              />
+            </div>
 
             <h1>{data.title}</h1>
             <p>{data.description}</p>
@@ -55,6 +65,7 @@ export function Details(){
                   {
                     data.links.map(link => (
                       <li key={String(link.id)}>
+                        <IoLink />
                         <a href={link.url.startsWith('http') ? link.url : `https://${link.url}`} target='_blank'>
                           {link.url}
                         </a>
@@ -74,11 +85,6 @@ export function Details(){
                 }
               </Section>
             }
-
-            <Button 
-              onClick={() => navigate(-1)}
-              title='Back'
-            />
           </Content>
         </main>
       }
