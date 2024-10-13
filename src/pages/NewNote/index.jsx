@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { api } from '../../services/api';
 import { ButtonText } from '../../components/ButtonText';
+import { toast } from 'react-toastify';
 
 export function NewNote(){
  const [title, setTitle] = useState('');
@@ -43,12 +44,12 @@ export function NewNote(){
   }
 
   async function handleNewNote(){
-    if(!title) return alert('The title is required');
-    if(newLink) return alert('It looks like you forgot to add one link!');
-    if(newTag) return alert('It looks like you forgot to add one tag!');
+    if(!title) return toast.warn('The title is required');
+    if(newLink) return toast.warn('It looks like you forgot to add one link!');
+    if(newTag) return toast.warn('It looks like you forgot to add one tag!');
 
     const allLinksValid = links.every(link => link.startsWith('http://') || link.startsWith('https://'));
-    if (!allLinksValid) return alert('Please make sure all links start with http:// or https://');
+    if (!allLinksValid) return toast.warn('Please make sure all links start with http:// or https://');
     
     await api.post('/notes', {
       title,
@@ -57,13 +58,14 @@ export function NewNote(){
       tags
     });
 
-    alert('New note added successfully');
+    toast.success('New note added successfully');
     navigate(-1);
   }
 
   return ( 
     <Container>
       <Header />
+      
       <main>
         <Form>
           <header>

@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { api } from '../services/api';
+import { toast } from 'react-toastify';
 
 export const AuthContext = createContext({});
 
@@ -17,8 +18,8 @@ export function AuthProvider({ children }) {
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       setData({ user, token });
     } catch (err) {
-      if (err.response) alert(err.response.data.message);
-      else alert('It was not possible to sign in');
+      if (err.response) toast.error(err.response.data.message);
+      else toast.error('It was not possible to sign in');
     }
   }
 
@@ -43,10 +44,10 @@ export function AuthProvider({ children }) {
       localStorage.setItem('@rocketnotes:user', JSON.stringify(user));
       
       setData({ user, token: data.token });
-      alert('Updated profile!');
+      toast.success('Profile updated successfully');
     } catch (err) {
-      if (err.response) alert(err.response.data.message);
-      else alert('It was not possible to update your profile');
+      if (err.response) toast.error(err.response.data.message);
+      else toast.error('It was not possible to update your profile');
     }
   }
 

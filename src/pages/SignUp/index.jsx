@@ -7,6 +7,7 @@ import { FiLock, FiUser } from 'react-icons/fi';
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export function SignUp(){
   const [name, setName] = useState('');
@@ -16,17 +17,17 @@ export function SignUp(){
   const navigate = useNavigate();
 
   function handleSignUp(){
-    if(!name || !email || !password) return alert('Please fill all the required fields');
+    if(!name || !email || !password) return toast.warn('Please fill all the required fields');
     
     api
       .post('/users', { name, email, password })
       .then(() => {
-        alert('User created successfully');
+        toast.success('User created successfully');
         navigate('/');
       })
       .catch(err => {
-        if(err.response) alert(err.response.data.message);
-        else alert('It was not possible to sign up');
+        if(err.response) toast.error(err.response.data.message);
+        else toast.error('It was not possible to sign up');
       });
   }
 

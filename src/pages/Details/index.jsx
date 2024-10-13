@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { api } from '../../services/api.js';
 import { FaArrowLeft } from "react-icons/fa6";
 import { IoLink } from "react-icons/io5";
+import { toast } from 'react-toastify';
 
 export function Details(){
   const [data, setData] = useState(null);
@@ -30,7 +31,7 @@ export function Details(){
 
     if(confirm){
       await api.delete(`/notes/${params.id}`);
-      alert('Note deleted successfully');
+      toast.success('Note deleted successfully');
       navigate(-1);
     }
   }
