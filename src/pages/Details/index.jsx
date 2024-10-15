@@ -1,4 +1,4 @@
-import { Container, Links, Content } from './styles.js';
+import { Container, Links, Content, Modal } from './styles.js';
 
 import { Header } from '../../components/Header';
 import { Section } from '../../components/Section';
@@ -10,9 +10,12 @@ import { api } from '../../services/api.js';
 import { FaArrowLeft } from "react-icons/fa6";
 import { IoLink } from "react-icons/io5";
 import { toast } from 'react-toastify';
+import { Button } from '../../components/Button/index.jsx';
+import { IoMdClose } from "react-icons/io";
 
 export function Details(){
   const [data, setData] = useState(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const navigate = useNavigate();
   const params = useParams();
@@ -27,19 +30,20 @@ export function Details(){
   }, []);
 
   async function handleDelete(){
-    const confirm = window.confirm('Are you sure you want to delete this note?');
-
-    if(confirm){
+    try {
       await api.delete(`/notes/${params.id}`);
       toast.success('Note deleted successfully');
       navigate(-1);
+    } catch (error) {
+      toast.error('Failed to delete note');
     }
+    setIsDeleteModalOpen(false);
   }
   
   return(
     <Container>
       <Header />
-
+      
       { data &&
         <main>
           <Content>
@@ -52,7 +56,7 @@ export function Details(){
               </button>
 
               <ButtonText 
-                onClick={handleDelete}
+                onClick={() => setIsDeleteModalOpen(true)}
                 title="Delete note" 
               />
             </div>
@@ -89,6 +93,23 @@ export function Details(){
           </Content>
         </main>
       }
+
+      {isDeleteModalOpen && (
+        <Modal>
+          <div>
+            <header>
+              <div>
+                <h2>Are you sure about deleting this note?</h2>
+                <p>This action can't be undone!</p>
+              </div>
+              <button onClick={() => setIsDeleteModalOpen(false)}>
+                <IoMdClose />
+              </button>
+            </header>
+            <Button title='Confirm' onClick={handleDelete}/>
+          </div>
+        </Modal>
+      )}
     </Container>
   )
 }

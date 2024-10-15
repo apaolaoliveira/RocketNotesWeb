@@ -68,3 +68,62 @@ export const Content = styled.div`
     text-align: justify;
   }
 `;
+
+export const Modal = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  div {
+    background: ${({theme}) => theme.COLORS.BACKGROUND_800};
+    padding: 2rem 3rem;
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+
+    header {
+      display: flex;
+      justify-content: space-between;
+
+      div {
+        display: flex;
+        flex-direction: column;
+
+        h2 {
+          font-size: 2.4rem;
+          margin: 1.6rem 0;
+        }
+
+        p {
+          font-size: 1.8rem;
+          margin-bottom: 1.6rem;
+        }
+      }
+
+      button {
+        background: transparent;
+        border: none;
+        position: absolute;
+        color: ${({theme}) => theme.COLORS.WHITE};
+        right: 1rem;
+        font-size: 2.5rem;
+
+        svg {
+          color: ${({theme}) => theme.COLORS.ORANGE};
+        }
+      }
+    }
+  }
+
+  button {
+    margin: 0 1rem;
+  }
+`;
