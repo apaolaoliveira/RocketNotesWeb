@@ -9,7 +9,7 @@ import { Container, Form } from './styles';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { api } from '../../services/api';
-import { ButtonText } from '../../components/ButtonText';
+import { FaArrowLeft } from "react-icons/fa6";
 import { toast } from 'react-toastify';
 
 export function NewNote(){
@@ -69,8 +69,13 @@ export function NewNote(){
       <main>
         <Form>
           <header>
+            <button 
+              onClick={() => navigate(-1)}
+              type='button'
+            >
+              <FaArrowLeft/>
+            </button>
             <h1>New Note</h1>
-            <ButtonText onClick={() => navigate(-1)} title="Back" />
           </header>
           <Input 
             type="text" 

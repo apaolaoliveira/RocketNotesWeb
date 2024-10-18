@@ -28,14 +28,18 @@ export const Form = styled.form`
 
   > header {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 1rem;
+    
 
     margin-bottom: 3.6rem;
 
     button {
       font-size: 2rem;
-      color: ${({theme}) => theme.COLORS.GRAY_100};
+      color: ${({theme}) => theme.COLORS.ORANGE};
+      background-color: transparent;
+      border: none;
+      width: max-content;
     }
   }
 `;
