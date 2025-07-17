@@ -13,22 +13,33 @@ export function SignUp(){
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
-  function handleSignUp(){
+  async function handleSignUp() {
     if(!name || !email || !password) return toast.warn('Please fill all the required fields');
-    
-    api
-      .post('/users', { name, email, password })
-      .then(() => {
-        toast.success('User created successfully');
-        navigate('/');
-      })
-      .catch(err => {
-        if(err.response) toast.error(err.response.data.message);
-        else toast.error('It was not possible to sign up');
-      });
+  
+    setLoading(true);
+  
+    const timeoutId = setTimeout(() => {
+      toast.warn("Warming up the server... This may take a few seconds. Thanks for your patience!");
+    }, 6000);
+  
+    try {
+      await api.post('/users', { name, email, password });
+      toast.success('User created successfully');
+      navigate('/');
+    } catch (err) {
+      if (err.response && err.response.data && err.response.data.message) {
+        toast.error(err.response.data.message);
+      } else {
+        toast.error('It was not possible to sign up, please try again later');
+      }
+    } finally {
+      clearTimeout(timeoutId);
+      setLoading(false);
+    }
   }
 
   return(
@@ -58,7 +69,11 @@ export function SignUp(){
           onChange={e => setPassword(e.target.value)}
         />
 
-        <Button title="Sign up" onClick={handleSignUp}/>
+        <Button 
+          title="Sign up"
+          onClick={handleSignUp}
+          loading={loading}
+        />
 
         <Link to="/">Back</Link>
       </Form>

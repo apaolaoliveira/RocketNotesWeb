@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from "styled-components";
 
 export const Container = styled.button`
   width: 100%;
@@ -12,7 +12,18 @@ export const Container = styled.button`
   border-radius: 1rem;
   font-weight: 500;
 
-  &:disabled {
-    opacity: 0.5;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  opacity: ${({ disabled }) => (disabled ? 0.8 : 1)};
+  transition: opacity 0.3s;
+
+  ${({ $isLoading }) =>
+    $isLoading &&
+    css`
+      pointer-events: none;
+      opacity: 0.8;
+    `}
 `;

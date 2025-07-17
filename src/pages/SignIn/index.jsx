@@ -6,15 +6,31 @@ import { MdOutlineAlternateEmail } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useAuth } from '../../hooks/auth';
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export function SignIn(){
   const { signIn } = useAuth();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  function handleSignIn(){
-    signIn({ email, password });
+  async function handleSignIn(){
+    setLoading(true);
+
+    const timeoutId = setTimeout(() => {
+      toast.warn("Warming up the server... This may take a few seconds. Thanks for your patience!");
+    }, 6000);
+
+    try {
+      await signIn({ email, password });
+    } catch(error) {
+      console.error(error)
+      toast.error("Error signing in, please check your credentials.");
+    } finally {
+      clearTimeout(timeoutId);
+      setLoading(false);
+    }
   }
 
   return(
@@ -37,7 +53,11 @@ export function SignIn(){
           onChange={e => setPassword(e.target.value)}
         />
 
-        <Button title="Login" onClick={handleSignIn}/>
+        <Button 
+          title="Login"
+          onClick={handleSignIn}
+          loading={loading}
+        />
 
         <Link to="/register">Sign up</Link>
       </Form>
